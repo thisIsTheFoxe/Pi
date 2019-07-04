@@ -45,7 +45,11 @@ def bf(string):
             sys.stdout.write(chr(plist[dpointer]))
             sys.stdout.flush()
         elif string[pointer] == ',':
-            plist[dpointer] = ord(sys.stdin.readline()[0])
+	    lines = sys.stdin.readline()
+	    if(len(lines) == 0):
+		plist[dpointer] = 0
+	    else:
+            	plist[dpointer] = ord(lines[0])
             sys.stdin.flush()
         pointer+=1
 
