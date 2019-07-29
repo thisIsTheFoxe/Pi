@@ -59,11 +59,20 @@ def pi2bf(string):
     t = { 0:'>', 1:'<', 2:'+', 3:'-', 4:'.', 5:',', 6:'[', 7:']' }
     k, a, b, a1, b1, r = 2, 4, 1, 12, 4, True
     while r:
-        p, q, k = k*k, 2*k+1, k+1
-        a, b, a1, b1 = a1, b1, p*a+q*a1, p*b+q*b1
-        d = int(a / b)
-        d1 = int(a1 / b1)
+        p = k*k
+        q = 2*k+1
+        k = k+1
+        tmpa = a1
+        tmpb = b1
+        a1 = (p*a)+(q*a1)
+        b1 = (p*b)+(q*b1)
+        a = tmpa
+        b = tmpb
+        d = int(a/b)
+        d1 = int(a1/b1)
+        #print(p,q,a,a1,b,b1)
         while d == d1:
+            #print(d,d1)
             if len(string):
                 c = string[0]
                 string = string[1:]
@@ -74,8 +83,12 @@ def pi2bf(string):
             try: c = int(c)
             except: continue
             if c != d: out += t[c - (c > d)]
-            a, a1 = 10*(a%b), 10*(a1%b1)
-            d, d1 = int(a/b), int(a1/b1)
+            a = 10*(a%b)
+            a1 = 10*(a1%b1)
+            d = int(a/b)
+            d1 = int(a1/b1)
+    print(p,q,k,a,b,a1,b1)
+#print(d,d1,a,a1)
     return out
 
 def bf2pi(string):
